@@ -39,6 +39,7 @@ int main()
             break;
         case 3:
             merge_filter();
+            exitt();
             break;
         case 4:
             flip_image();
@@ -187,3 +188,8 @@ void saveImage () {
     strcat(imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
 }
+
+
+
+
+
