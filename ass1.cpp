@@ -31,16 +31,22 @@ int main()
     switch (n) {
         case 1:
             black_White();
+            brake;
         case 2:
             invert_filter();
+            brake;
 //        case 3:
 //            merge_filter();
+//            brake;
 //        case 4:
 //            flip_image();
+//            brake;
 //        case 5:
 //            darken_lighten();
+//            brake;
 //        case 6:
 //            rotate_image();
+//            brake;
         case 0:
             exitt();
     }
