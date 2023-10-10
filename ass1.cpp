@@ -1,14 +1,13 @@
 // FCAI – OOP Programming – 2023 - Assignment 1
-// Program Name:				          Filters.cpp
-// Last Modification Date:	      9/10/2023
-// Author1 and ID and Group:	    Mohamed Talaat Hassan 20220710
-// Author2 and ID and Group:	    Eslam abdelmksoud salah 20210065
-// Author3 and ID and Group:	    mehad fath alrhaman mohamed 20220716
-// Teaching Assistant:		        xxxxx xxxxx
-// Purpose:                       A program that takes a photo from the user
-//                                and gives him a number of filters, so he can
-//                                choose which one to apply to it
-
+// Program Name:				Filters.cpp
+// Last Modification Date:	    10/10/2023
+// Author1 and ID and Group:	Mohamed Talaat Hassan 20220710
+// Author2 and ID and Group:	Eslam abdelmksoud salah 20210065
+// Author3 and ID and Group:	mehad fath alrhaman mohamed 20220716
+// Teaching Assistant:		    xxxxx xxxxx
+// Purpose:                     A program that takes a photo from the user
+//                              and gives him a number of filters, so he can
+//                              choose which one to apply to it
 
 #include <iostream>
 #include <cstring>
@@ -120,7 +119,7 @@ void invert_filter() {
 
 
 //_________________________________________
-
+// marge filter by mehad fath alrhaman mohamed 20220716
 void merge_filter() {
     char imageFileName[100];
 
@@ -155,12 +154,13 @@ void merge_filter() {
 
 void flip_image() {
     char x;
+    unsigned char n ;
     cout<<"Flip (h)orizontally or (v)ertically ?";
     cin>>x;
     if (x =='h'){
         for (int i = 0; i < SIZE ; i++) {
             for (int j = 0; j < SIZE / 2; j++) {
-                unsigned char n = image[i][j];
+                n = image[i][j];
                 image[i][j] = image[i][SIZE - j - 1];
                 image[i][SIZE - j - 1] = n;
             }
@@ -169,7 +169,7 @@ void flip_image() {
     else if (x == 'v'){
         for (int i = 0; i < SIZE /2; i++) {
             for (int j = 0; j < SIZE; j++) {
-                unsigned char n = image[i][j];
+                n = image[i][j];
                 image[i][j] = image[SIZE - i - 1][j];
                 image[SIZE - i - 1][j] = n;
             }
@@ -178,7 +178,7 @@ void flip_image() {
 }
 
 //_________________________________________
-
+// darken lighten filter by mehad fath alrhaman mohamed 20220716
 void darken_lighten() {
     char x;
     cout<<"Do you want to (d)arken or (l)ighten?";
@@ -194,14 +194,8 @@ void darken_lighten() {
                 }
                 else image[i][j] += 120;
             }
-            else if (x == 'd'){
-                if (image[i][j] < 127 && image[i][j] > 60) {
-                    image[i][j] -= 60;
-                }
-                else if (image[i][j] <= 60) {
-                    image[i][j] = 0;
-                }
-                else image[i][j] -= 120;
+            else if (x == 'd') {
+                image[i][j] = (image[i][j]) / 2;
             }
         }
     }
@@ -212,17 +206,61 @@ void darken_lighten() {
 // rotate filter by Eslam abdelmksoud salah 20210065
 
 void rotate_image(){
-    for (int i = 0; i < SIZE; ++i) {
-        for (int j = 0; j < SIZE; ++j) {
+        int n;
+        cout<<"Choose the degree of rotation";
+        cin>>n;
+        if(n==270){
+            int matrix[SIZE][SIZE];
+            for (int i = 0; i < SIZE; i++) {
 
+                for (int j = 0; j < SIZE; j++) {
+
+                    matrix[SIZE - 1 - j][i] = image[i][j];
+
+                }
+            }
+            for (int i = 0; i < SIZE; i++) {
+
+                for (int j = 0; j < SIZE; j++) {
+                    image[i][j] = matrix[i][j];
+                }
+            }
         }
+        else if(n==90){
+            int matrix[SIZE][SIZE];
+            for (int i = 0; i < SIZE; i++) {
 
+                for (int j = 0; j < SIZE; j++) {
+
+                    matrix[j][SIZE - 1 - i] = image[i][j];
+
+                }
+            }
+            for (int i = 0; i < SIZE; i++) {
+
+                for (int j = 0; j < SIZE; j++) {
+                    image[i][j] = matrix[i][j];
+                }
+            }
+        }
+        else if(n==180){
+            int matrix[SIZE][SIZE];
+            for (int i = 0; i < SIZE; i++) {
+
+                for (int j = 0; j < SIZE; j++) {
+
+                    matrix[SIZE-i-1][SIZE - 1 - j] = image[i][j];
+
+
+                }
+            }
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    image[i][j] = matrix[i][j];
+                }
+            }
+        }
     }
-
-
-
-}
-
 //_________________________________________
 
 void out(){
